@@ -1,0 +1,60 @@
+# Ignore macOS system files
+.DS_Store
+
+# Ignore IDE and editor files
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Ignore build and output directories
+build/
+dist/
+out/
+
+# Ignore dependency directories
+node_modules/
+vendor/
+
+# Ignore environment files
+.env
+.env.local
+.env.development
+.env.test
+.env.production
+
+# Ignore log files
+*.log
+
+# Ignore temporary files
+*.tmp
+*.temp
+
+# Ignore OS-specific files
+Thumbs.db
+desktop.ini
+
+# Ignore IDE and editor files
+*.sublime-workspace
+*.sublime-project
+*.code-workspace
+
+# Ignore configuration files
+*.config
+*.cfg
+
+# Ignore coverage reports
+coverage/
+
+# Ignore test output
+test-results/
+
+# Ignore package manager lock files
+package-lock.json
+npm-debug.log*
+yarn-error.log*
+
+# Ignore IDE and editor files
+*.iml
+*.ipr
+*.iws
