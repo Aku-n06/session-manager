@@ -1,53 +1,47 @@
-# session manager
+# Session Manager
 
-This is a small session manager for the terminal; managing multiple sessions that can be
-accessed remotely through OpenSSH, leveraging tmux.
+A lightweight terminal session manager that simplifies managing multiple tmux sessions, especially useful for remote access via OpenSSH.
 
-Or in simple words, a pretty wrapper around tmux.
+## Features
 
-This script is most useful when wired into your shell startup (for example, a small
-function in `.zshrc`, `.zprofile`, `.bashrc`, or `.bash_profile`). That way, every new
-terminal automatically shows the menu, making it easy to pick up an existing session you
-started elsewhere (for example, from a mobile device over OpenSSH).
+- **Session Management**: View and manage existing tmux sessions with a simple menu interface.
+- **Quick Actions**: Use single-key commands to create, delete, or resume sessions.
+- **User-Friendly**: Designed for ease of use, even for those unfamiliar with tmux.
 
-It works with any POSIX-compatible shell; the script itself is `sh`, so the same setup
-applies across shells.
+## Setup
 
-If you want this fully automated, run the setup script. It installs the menu to
-`~/.session-manager/bin` and updates your detected shell config so the menu appears when
-a new interactive shell starts.
+### Prerequisites
+- **zsh**: This session manager is designed to work with zsh. Ensure zsh is installed on your system.
+- **tmux**: Required for managing terminal sessions.
+- **curl**: Required for downloading the repository.
+- **tar**: Required for extracting the downloaded repository.
+- **mktemp**: Required for creating temporary directories.
 
-If you prefer to keep it in this repo, call `~/.cli-dev-tools/sessions-manager/session-menu.sh`
-directly from your shell startup instead.
-
-### Features
-
-Every time you execute the main script; a list of existing sessions is shown to the user,
-who can then select one of the existing tmux sessions to attach to, or start a new one.
-The menu uses single-key commands for create, delete, and resume.
-
-### Setup
+### One-Command Installation (Recommended)
+Run the following command to automatically install and configure the session manager:
 
 ```sh
-./setup.sh
+sh -c "$(curl -sL https://raw.githubusercontent.com/Aku-n06/session-manager/main/install.sh)"
 ```
 
-What it does:
-
-- Installs `session-menu.sh` as `~/.session-manager/bin/session-menu`.
-- Detects your login shell and updates the appropriate config file.
+This script:
+- Downloads the repository.
+- Installs `session-menu.sh` to `~/.session-manager/bin/session-menu`.
+- Updates your `.zshrc` file to automatically run the session menu in interactive shells.
 - Ensures the menu runs only in interactive shells and not inside tmux.
 
-### Menu
+### Manual Setup
+If you prefer to keep the script in this repository, add the following line to your `.zshrc` file:
 
-When you run the script, it prints a menu of available tmux sessions, plus a one-key
-command line for actions. Sessions created by this script are stored with a safe timestamp
-name like `YYYYMMDD_HHMMSS`, but the menu displays them in Swiss format.
+```sh
+~/.cli-dev-tools/sessions-manager/session-menu.sh
+```
 
-Why this menu format: the script reads a single key for input, which keeps the UI
-responsive without requiring Enter and matches the current interaction model.
+## Menu
 
-The menu uses single-key commands:
+When you run the script, it displays a menu of available tmux sessions along with single-key commands for quick actions. Sessions are stored with a timestamp name (e.g., `YYYYMMDD_HHMMSS`) but are displayed in a user-friendly format.
+
+#### Example Menu:
 
 ```text
 Available tmux sessions:
@@ -57,23 +51,35 @@ Available tmux sessions:
 [n]ew  [d]elete  [r]esume
 ```
 
-Press `n` to create and attach to a new session, `d` to delete a session from a
-numbered list, or `r` to resume a session from a numbered list.
+- **`n`**: Create and attach to a new session.
+- **`d`**: Delete a session from the numbered list.
+- **`r`**: Resume a session from the numbered list.
 
-### Loop on exit
+## Loop on Exit
 
-To show the menu again after you exit or detach from tmux, run the script with a loop
-flag from your shell startup:
+To automatically show the menu again after exiting or detaching from tmux, use the loop flag in your shell startup:
 
 ```sh
 SESSION_MENU_LOOP=1 ~/.cli-dev-tools/sessions-manager/session-menu.sh
 ```
 
-When tmux ends, the script re-runs itself and shows the menu again.
+This ensures the menu reappears when tmux ends, providing seamless session management.
 
-You can disable it for a single shell session with:
+#### Disabling the Menu
+To disable the menu for a single shell session, use:
 
 ```sh
 export SESSION_MENU_DISABLE=1
 ```
-# session-manager
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+## Contributing
+
+Contributions are welcome! Please open an issue or submit a pull request for any improvements or bug fixes.
+
+## Support
+
+For questions or issues, please open an issue on the GitHub repository.
